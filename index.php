@@ -1,5 +1,5 @@
 <?php
-include 'utilities.php';
+include __DIR__ . '/utilities.php';
 $email = $_POST['email'] ?? '';
 
 ?>
