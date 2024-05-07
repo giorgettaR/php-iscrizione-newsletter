@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . '/utilities.php';
 $email = $_POST['email'] ?? '';
-
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -27,15 +27,18 @@ $email = $_POST['email'] ?? '';
                 </form>
             </div>
             <div class="col-12">
-                <?php if (isEmailOk($email)) {
-                    echo '<div class="alert alert-success" role="alert">
-                            Iscrizione Eseguita con Successo!
-                          </div>';
-                } else {
-                    echo '<div class="alert alert-warning" role="alert">
-                            Email non valida!
-                          </div>';
-                } ?>
+                <?php 
+                if ($email != '') {
+                    if (isEmailOk($email)) {
+                        $_SESSION['email'] = $email;
+                        $_SESSION['isEmailOk'] = true;
+                        header('Location: ./subscription.php');
+                    } else {
+                        $_SESSION['isEmailOk'] = false;
+                        header('Location: ./subscription.php');
+                    }
+                };
+                 ?>
             </div>
         </div>
     </div>
